@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<root>
+  <item>
+		<name>N305対応の改良案</name>
+		<item>
+		<name>基本設定</name>
+			<identifier>private.N305new</identifier>
+			<device_only>DeviceVendor::LOGITECH,DeviceProduct::LOGITECH_UNIFYING_0xc52b</device_only>
+
+// イコール、括弧を使えるようにする
+			<autogen>__SimultaneousKeyPresses__ KeyCode::OPTION_L, KeyCode::KEYPAD_6, KeyCode::VK_MODIFIER_EXTRA1</autogen>
+			<autogen>__SimultaneousKeyPresses__ KeyCode::OPTION_L, KeyCode::KEYPAD_4, KeyCode::VK_MODIFIER_EXTRA2</autogen>
+			<autogen>__KeyToKey__ KeyCode::KEYPAD_1, ModifierFlag::EXTRA1, KeyCode::KEYPAD_EQUAL</autogen>
+			<autogen>__KeyToKey__ KeyCode::KEYPAD_0, ModifierFlag::EXTRA2, KeyCode::KEY_9, ModifierFlag::SHIFT_L</autogen>
+			<autogen>__KeyToKey__ KeyCode::KEYPAD_1, ModifierFlag::EXTRA2, KeyCode::KEY_0, ModifierFlag::SHIFT_L</autogen>
+
+// numlock削除
+			<block>
+				<not>VIRTUALMACHINE</not>
+				<autogen>__KeyToKey__ KeyCode::PC_KEYPAD_NUMLOCK, KeyCode::VK_NONE</autogen>
+			</block>
+
+// 計算機.appへの対応
+			<block>
+				<only>CALCULATOR</only>
+				<autogen>__KeyToKey__ KeyCode::FORWARD_DELETE, KeyCode::ESCAPE</autogen>
+			</block>
+		</item>
+
+		<item>
+			<name>ClearキーをTabにする (計算機.appを除く)</name>
+			<identifier>private.n305clear2tab</identifier>
+			<device_only>DeviceVendor::LOGITECH,DeviceProduct::LOGITECH_UNIFYING_0xc52b</device_only>
+			<appendix>(チェックしなければForward Delete)</appendix>
+			<autogen>__KeyToKey__ KeyCode::FORWARD_DELETE, KeyCode::TAB</autogen>
+		</item>
+
+		<item>
+			<name>左シフトを無視 (N305がスリープから復帰するときに出力される)</name>
+			<identifier>private.n305ignore_shiftL</identifier>
+			<device_only>DeviceVendor::LOGITECH,DeviceProduct::LOGITECH_UNIFYING_0xc52b</device_only>
+			<appendix>(同じUnifyingレシーバーにつながるキーボードがあったら道連れ)</appendix>
+			<autogen>__KeyToKey__ KeyCode::SHIFT_L, KeyCode::VK_NONE</autogen>
+		</item>
+
+		<item>
+			<name>Windows用の左上ボタン(エクセル起動)と右上ボタン(アプリケーションの切り替え)</name>
+			<appendix>(とりあえずは誤動作防止で無効に。何かキー割り当ても可能)</appendix>
+			<identifier>private.n305ignore_buttons</identifier>
+// 左上ボタン (Win+R excel[return]:ファイル名を指定して実行)
+			<autogen>__SimultaneousKeyPresses__ KeyCode::COMMAND_L, KeyCode::R, KeyCode::VK_LOCK_EXTRA3_FORCE_ON</autogen>
+			<autogen>__KeyToKey__ KeyCode::E, ModifierFlag::EXTRA3, KeyCode::VK_NONE</autogen>
+			<autogen>__KeyToKey__ KeyCode::X, ModifierFlag::EXTRA3, KeyCode::VK_NONE</autogen>
+			<autogen>__KeyToKey__ KeyCode::C, ModifierFlag::EXTRA3, KeyCode::VK_NONE</autogen>
+			<autogen>__KeyToKey__ KeyCode::L, ModifierFlag::EXTRA3, KeyCode::VK_NONE</autogen>
+			<autogen>__KeyToKey__ KeyCode::RETURN, ModifierFlag::EXTRA3, KeyCode::VK_LOCK_EXTRA3_FORCE_OFF</autogen>
+// 左上ボタンを押してすぐリターンキー(他のUnifying対応キーボードの)を打つとNG
+
+
+// 右上ボタン (Alt+Tab:アプリケーションの切り替え)
+			<autogen>__SimultaneousKeyPresses__ KeyCode::OPTION_L, KeyCode::TAB, KeyCode::VK_NONE</autogen>
+		</item>
+
+	</item>
+</root>
