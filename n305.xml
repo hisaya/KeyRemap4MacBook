@@ -56,7 +56,6 @@
 			<autogen>__KeyToKey__ KeyCode::RETURN, ModifierFlag::EXTRA3, KeyCode::VK_LOCK_EXTRA3_FORCE_OFF</autogen>
 // 左上ボタンを押してすぐリターンキー(他のUnifying対応キーボードの)を打つとNG
 
-
 // 右上ボタン (Alt+Tab:アプリケーションの切り替え)
 			<autogen>__SimultaneousKeyPresses__ KeyCode::OPTION_L, KeyCode::TAB, KeyCode::VK_NONE</autogen>
 		</item>
